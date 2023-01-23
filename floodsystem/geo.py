@@ -25,6 +25,9 @@ def stations_by_distance(stations,p) -> list:
     return sorted_stations
 
 def stations_within_radius(stations, centre, r):
+    """
+    Used to list the stations within a cirtain radius r from a center
+    """
     sorted_stations = stations_by_distance(stations,centre)
 
     stations_within_r = []
@@ -35,6 +38,9 @@ def stations_within_radius(stations, centre, r):
     return stations_within_r
 
 def rivers_with_station(stations):
+    """
+    Returns a list of rivers with a station on them with no repeat rivers in the list
+    """
     river_stations_list = []
     for i in stations:
         if type(i.river) == type(""):
@@ -43,6 +49,9 @@ def rivers_with_station(stations):
     return river_stations_set
 
 def stations_by_river(stations):
+    """
+    Returns a dictionary with rivers as the key and the items are a list of stations that are upon that river
+    """
     list_of_rivers = rivers_with_station(stations)
     stations_by_river_dict = {}
     for river in list_of_rivers:
