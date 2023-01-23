@@ -23,3 +23,13 @@ def stations_by_distance(stations,p) -> list:
     sorted_stations = sorted_by_key(unsorted_list,1)
 
     return sorted_stations
+
+def stations_within_radius(stations, centre, r):
+    sorted_stations = stations_by_distance(stations,centre)
+
+    stations_within_r = []
+    for i in sorted_stations:
+        if i[1] <= r:
+            stations_within_r.append(i[0])
+    
+    return stations_within_r
