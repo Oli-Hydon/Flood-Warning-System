@@ -6,7 +6,7 @@ geographical data.
 
 """
 
-from .utils import sorted_by_key  # noqa
+from floodsystem.utils import sorted_by_key  # noqa
 from haversine import haversine
 def stations_by_distance(stations,p) -> list:
     """
@@ -61,3 +61,23 @@ def stations_by_river(stations):
                 stations_on_river.append(station)
         stations_by_river_dict.update({river:stations_on_river})
     return stations_by_river_dict
+
+def rivers_by_station_number(stations, N):
+    result = []
+    dic_of_rivers = stations_by_river(stations)
+    #print(dic_of_rivers)
+    list_of_rivers_names = list(dic_of_rivers.keys())
+    list_of_rivers = []
+    for i in list_of_rivers_names:
+        #print(dic_of_rivers[i])
+        list_of_rivers.append([i,len(dic_of_rivers[i])])
+    #print(list_of_rivers)
+    list_of_rivers.sort(key = lambda x :  x[1], reverse= True)
+    #print(list_of_rivers)
+    while(N < len(list_of_rivers)-1 and list_of_rivers[N+1][1] == list_of_rivers[N][1]):
+        N += 1
+    for i in range(0,len(list_of_rivers)):
+        list_of_rivers[i] = tuple(list_of_rivers[i])
+    return list_of_rivers[0:N+1]
+    
+    
