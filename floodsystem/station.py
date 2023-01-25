@@ -29,6 +29,9 @@ class MonitoringStation:
 
         self.latest_level = None
 
+
+
+
     def __repr__(self):
         d = "Station name:     {}\n".format(self.name)
         d += "   id:            {}\n".format(self.station_id)
@@ -38,3 +41,28 @@ class MonitoringStation:
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}".format(self.typical_range)
         return d
+    def typical_range_consistent(self):
+        # determining whether the range of the object is valid, return false for invalid range
+        if(self.typical_range is None):
+            return False
+        if(self.typical_range[0]>self.typical_range[1]):
+            return False
+        return True
+
+    def relative_water_level(self):
+        # return the relative water level of the station, none for invalid input. 0 for lowest, 1 for highest
+        if not self.typical_range_consistent() or self.latest_level is None:
+            return None
+        else:
+            return (self.latest_level - self.typical_range[0])/(self.typical_range[1]-self.typical_range[0])
+        pass
+    
+def inconsistent_typical_range_stations(stations):
+    #creating a list of names of stations that have invalid typical range
+    res = []
+    for i in stations:
+        if (not i.typical_range_consistent()):
+            res.append(i.name)
+            #print(i.typical_range)
+    res.sort()
+    return res
