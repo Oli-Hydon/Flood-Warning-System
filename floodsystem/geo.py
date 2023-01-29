@@ -80,7 +80,7 @@ def rivers_by_station_number(stations, N):
     while(N < len(list_of_rivers)-1 and list_of_rivers[N+1][1] == list_of_rivers[N][1]):
         N += 1
     for i in range(0,len(list_of_rivers)):
-        list_of_rivers = tuple(list_of_rivers[i])
+        list_of_rivers[i] = tuple(list_of_rivers[i])
     return list_of_rivers[0:N+1]
     
     
