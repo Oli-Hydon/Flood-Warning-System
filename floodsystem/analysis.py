@@ -1,7 +1,6 @@
 
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def polyfit(dates, levels, p):
@@ -14,11 +13,10 @@ def polyfit(dates, levels, p):
         in_days =  epoch_time /86400
         x.append(in_days)
     x=np.array(x)
-    print(x)
     polynomial_coefficents = np.polyfit(x-x[-1],levels,p)
     
     poly_data=np.poly1d(polynomial_coefficents)
 
-    return (poly_data,x[-1])
+    return (poly_data,x[-1]) 
 
     

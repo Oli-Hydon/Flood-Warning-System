@@ -16,5 +16,5 @@ for data in levels_for_each_station:
     dates = data[0][0]
     levels = data[0][1]
     if len(dates)>10:
-        plot_water_level_with_fit(station,dates,levels,4)
+        plot_water_level_with_fit(station,dates,levels,10)
 
