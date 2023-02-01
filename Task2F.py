@@ -3,6 +3,8 @@ from floodsystem.flood import stations_highest_rel_level
 from floodsystem.stationdata import build_station_list
 from floodsystem.datafetcher import fetch_measure_levels
 from datetime import timedelta
+
+
 stations = build_station_list()
 
 time_delta = timedelta(days=2)
