@@ -35,4 +35,3 @@ def test_polyfit():
         print(known_offset,returned_offset)
         assert round(returned_offset-(known_offset)) == 0     #tests if the offset returned by the polyfit function matches what it should be
     
-test_polyfit()
