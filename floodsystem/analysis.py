@@ -1,6 +1,9 @@
 
 
 import numpy as np
+from floodsystem.datafetcher import fetch_measure_levels
+import datetime
+from floodsystem.station import MonitoringStation
 
 
 def polyfit(dates, levels, p):
@@ -19,4 +22,13 @@ def polyfit(dates, levels, p):
 
     return (poly_data,x[-1]) 
 
-    
+def flood_index_station(station : MonitoringStation):
+    date,levels = fetch_measure_levels(station.measure_id,datetime.timedelta(days=10))
+    poly_data,offset = polyfit(date, levels,3)
+
+def sum(poly_data:np.poly1d,dates:list,levels:list):
+    sum = 0
+    for i in range(len(dates)):
+        
+        if(dates):
+            pass
