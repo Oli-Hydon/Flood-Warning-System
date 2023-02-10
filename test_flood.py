@@ -20,4 +20,12 @@ def test_stations_highest_rel_level():
     returned_stations=stations_highest_rel_level(stations,len(stations))
     for returned_station in returned_stations:
         assert(type(returned_station)==(MonitoringStation))    #Checks the function reutrns the correct data type and chekcs that it handles missing data
-test_stations_level_over_threshold()
+def test_flood_warning():
+    stations = build_station_list()
+    update_water_levels(stations)
+    levels = [(x,flood_warning(x)) for x in stations ]
+    assert (len(levels) != 0)
+    assert(type(levels[0][0])  == MonitoringStation)
+    assert(type(levels[0][1]) == type(" "))
+    
+    
