@@ -1,6 +1,11 @@
-from floodsystem.analysis import *
-import datetime as dt
-import numpy as np
+if __name__ ==  '__main__':
+    from floodsystem.analysis import *
+    from floodsystem.stationdata import *
+    import datetime as dt
+    from datetime import *
+    import numpy as np
+    import multiprocessing
+    from floodsystem.flood import stations_level_over_threshold
 
 """
 Unit test for analysis module
@@ -35,3 +40,45 @@ def test_polyfit():
         print(known_offset,returned_offset)
         assert round(returned_offset-(known_offset)) == 0     #tests if the offset returned by the polyfit function matches what it should be
     
+def test_flood_index_station():
+    stations = build_station_list()
+    
+    for station in stations:
+        if station.name == 'Cam':
+            station_cam = station
+            break
+    #print(station_cam)
+    
+    for i in stations:
+        i.floodindex = flood_index_station(i)
+        if i.floodindex >0:
+            print(i)
+            print(i.floodindex)
+        
+    stations.sort(key= lambda x: x.floodindex)
+    print(stations[:25]) 
+    #now = dt.datetime.utcnow()
+    #diff = timedelta(days=2)
+    # Start time for data
+    #start = now - diff
+def test_sum():
+    
+    pass
+#test_flood_index_station()
+
+if __name__ ==  '__main__':
+    
+    stations = build_station_list()
+    update_water_levels(stations)
+    stations = [i for i in stations if i.relative_water_level() is not None and i.relative_water_level()>0.8]
+    print(len(stations))
+    with multiprocessing.Pool(processes=15) as p:
+        procs = p.map(flood_index_station, stations) 
+    
+    print("station count "+ str(len(stations)))
+    for i in range(len(stations)):
+        stations[i].floodindex = procs[i]
+        print(stations[i].name + str(stations[i].floodindex))
+    stations.sort(key= lambda x: x.floodindex,reverse=True)
+    for i in range(len(stations)):
+        print(stations[i].name + str(stations[i].floodindex))

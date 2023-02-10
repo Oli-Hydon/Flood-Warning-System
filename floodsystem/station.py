@@ -28,6 +28,7 @@ class MonitoringStation:
         self.town = town
 
         self.latest_level = None
+        self.floodindex = -1000
 
 
 
