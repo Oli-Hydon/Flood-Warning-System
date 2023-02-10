@@ -45,7 +45,6 @@ def polyfit(dates: list[datetime], levels, p):
     Given dates and water levels it fits them to a polynomial of order p and returns a numpy poly1d class as well as the amount of offset days since 1/1/1970
     """
     x = []
-    print(date[0].timestamp())
     for date in dates:
         epoch_time = date.timestamp()
         in_days =  epoch_time /86400
