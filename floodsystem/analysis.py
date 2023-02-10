@@ -2,7 +2,8 @@
 
 import numpy as np
 from floodsystem.datafetcher import fetch_measure_levels
-from datetime import *
+from datetime import datetime
+from datetime import timedelta
 from floodsystem.station import MonitoringStation
 import pytz
 
@@ -39,11 +40,12 @@ class data:
             print("data error")
             return 0
         
-def polyfit(dates, levels, p):
+def polyfit(dates: list[datetime], levels, p):
     """
     Given dates and water levels it fits them to a polynomial of order p and returns a numpy poly1d class as well as the amount of offset days since 1/1/1970
     """
     x = []
+    print(date[0].timestamp())
     for date in dates:
         epoch_time = date.timestamp()
         in_days =  epoch_time /86400
@@ -105,3 +107,5 @@ def flood_index_station(station : MonitoringStation):
     res = past_data[0].net_above()
     return res
 flood_index_station.counter = 0
+#problem with time offset
+#use net values and timestamps for calculations

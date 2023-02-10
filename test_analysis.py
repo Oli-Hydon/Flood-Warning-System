@@ -1,11 +1,11 @@
-if __name__ ==  '__main__':
-    from floodsystem.analysis import *
-    from floodsystem.stationdata import *
-    import datetime as dt
-    from datetime import *
-    import numpy as np
-    import multiprocessing
-    from floodsystem.flood import stations_level_over_threshold
+
+from floodsystem.analysis import *
+from floodsystem.stationdata import *
+import datetime as dt
+from datetime import datetime
+import numpy as np
+import multiprocessing
+from floodsystem.flood import stations_level_over_threshold
 
 """
 Unit test for analysis module
@@ -16,7 +16,11 @@ def test_polyfit():
     #start by testing quadratic fit
     #test for the quadratic 3x^2 - 8x +5
     # known points (0,5), (1,0), (1.667,0)
-
+    from floodsystem.analysis import polyfit
+    import datetime as dt
+    from datetime import datetime
+    import numpy as np
+    from floodsystem.flood import stations_level_over_threshold
     dates = [datetime(1970,1,2,17), datetime(1970,1,2,1), datetime(1970,1,1,1)]       ##x coordinates converted to days since 1970
     levels = [0,0,5]
     returned_poly =  polyfit(dates,levels,2)[0]
@@ -67,7 +71,7 @@ def test_polyfit():
 #test_flood_index_station()
 
 if __name__ ==  '__main__':
-    
+    test_polyfit()
     stations = build_station_list()
     update_water_levels(stations)
     stations = [i for i in stations if i.relative_water_level() is not None and i.relative_water_level()>0.8]
