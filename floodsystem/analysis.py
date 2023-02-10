@@ -103,6 +103,5 @@ def flood_index_station(station : MonitoringStation):
     #     print("net")
     #     print(i.net_above())
     res = past_data[0].net_above()
-    print(station.floodindex)
     return res
 flood_index_station.counter = 0

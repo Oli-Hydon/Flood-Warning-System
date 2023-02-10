@@ -17,7 +17,7 @@ def test_polyfit():
     #test for the quadratic 3x^2 - 8x +5
     # known points (0,5), (1,0), (1.667,0)
 
-    dates = [dt.datetime(1970,1,2,17), dt.datetime(1970,1,2,1), dt.datetime(1970,1,1,1)]       ##x coordinates converted to days since 1970
+    dates = [datetime(1970,1,2,17), datetime(1970,1,2,1), datetime(1970,1,1,1)]       ##x coordinates converted to days since 1970
     levels = [0,0,5]
     returned_poly =  polyfit(dates,levels,2)[0]
     
@@ -40,30 +40,30 @@ def test_polyfit():
         print(known_offset,returned_offset)
         assert round(returned_offset-(known_offset)) == 0     #tests if the offset returned by the polyfit function matches what it should be
     
-def test_flood_index_station():
-    stations = build_station_list()
+# def test_flood_index_station():
+#     stations = build_station_list()
     
-    for station in stations:
-        if station.name == 'Cam':
-            station_cam = station
-            break
-    #print(station_cam)
+#     for station in stations:
+#         if station.name == 'Cam':
+#             station_cam = station
+#             break
+#     #print(station_cam)
     
-    for i in stations:
-        i.floodindex = flood_index_station(i)
-        if i.floodindex >0:
-            print(i)
-            print(i.floodindex)
+#     for i in stations:
+#         i.floodindex = flood_index_station(i)
+#         if i.floodindex >0:
+#             print(i)
+#             print(i.floodindex)
         
-    stations.sort(key= lambda x: x.floodindex)
-    print(stations[:25]) 
-    #now = dt.datetime.utcnow()
-    #diff = timedelta(days=2)
-    # Start time for data
-    #start = now - diff
-def test_sum():
+#     stations.sort(key= lambda x: x.floodindex)
+#     print(stations[:25]) 
+#     #now = dt.datetime.utcnow()
+#     #diff = timedelta(days=2)
+#     # Start time for data
+#     #start = now - diff
+# def test_sum():
     
-    pass
+    # pass
 #test_flood_index_station()
 
 if __name__ ==  '__main__':
@@ -78,7 +78,7 @@ if __name__ ==  '__main__':
     print("station count "+ str(len(stations)))
     for i in range(len(stations)):
         stations[i].floodindex = procs[i]
-        print(stations[i].name + str(stations[i].floodindex))
+        #print(stations[i].name + str(stations[i].floodindex))
     stations.sort(key= lambda x: x.floodindex,reverse=True)
     for i in range(len(stations)):
         print(stations[i].name + str(stations[i].floodindex))
