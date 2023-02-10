@@ -70,19 +70,19 @@ def test_polyfit():
     # pass
 #test_flood_index_station()
 
-if __name__ ==  '__main__':
-    test_polyfit()
-    stations = build_station_list()
-    update_water_levels(stations)
-    stations = [i for i in stations if i.relative_water_level() is not None and i.relative_water_level()>0.8]
-    print(len(stations))
-    with multiprocessing.Pool(processes=15) as p:
-        procs = p.map(flood_index_station, stations) 
+# if __name__ ==  '__main__':
+#     test_polyfit()
+#     stations = build_station_list()
+#     update_water_levels(stations)
+#     stations = [i for i in stations if i.relative_water_level() is not None and i.relative_water_level()>0.8]
+#     print(len(stations))
+#     with multiprocessing.Pool(processes=15) as p:
+#         procs = p.map(flood_index_station, stations) 
     
-    print("station count "+ str(len(stations)))
-    for i in range(len(stations)):
-        stations[i].floodindex = procs[i]
-        #print(stations[i].name + str(stations[i].floodindex))
-    stations.sort(key= lambda x: x.floodindex,reverse=True)
-    for i in range(len(stations)):
-        print(stations[i].name + str(stations[i].floodindex))
+#     print("station count "+ str(len(stations)))
+#     for i in range(len(stations)):
+#         stations[i].floodindex = procs[i]
+#         #print(stations[i].name + str(stations[i].floodindex))
+#     stations.sort(key= lambda x: x.floodindex,reverse=True)
+#     for i in range(len(stations)):
+#         print(stations[i].name + str(stations[i].floodindex))
