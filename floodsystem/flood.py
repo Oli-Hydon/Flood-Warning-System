@@ -27,10 +27,13 @@ def flood_warning(station : MonitoringStation):
     elif percent<0.8:
         return "medium"
     else:
-        dt = 1
-        dates,levels = fetch_measure_levels(station.measure_id,dat.timedelta(days=dt))
-        pf:poly1d= polyfit(dates, levels,3)[0]
-        if(pf.deriv(1)((dates[0].timestamp()/86400))>=2):
-            return "severe"
-        else:
-            return "high"
+        try:
+            dt = 1
+            dates,levels = fetch_measure_levels(station.measure_id,dat.timedelta(days=dt))
+            pf:poly1d= polyfit(dates, levels,3)[0]
+            if(pf.deriv(1)((dates[0].timestamp()/86400))>=2):
+                return "severe"
+            else:
+                return "high"
+        except:
+            return "data error"
